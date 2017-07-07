@@ -16,12 +16,13 @@ class Division < ApplicationRecord
   after_save :build_groups, :if => Proc.new { |model| model.number_of_groups }
 
   private
+
   def build_groups
     groups.destroy_all
     student_groups = batch.students.shuffle.in_groups(self.number_of_groups.to_i, false).to_a
 
     student_groups.each_with_index do |student_group, index|
-      group = Group.create(division: self, name: "Group #{index + 1}")
+      group = Group.create(division: self, name: Group.random_name)
       student_group.each do |student|
         Groupship.create(student: student, group: group)
       end
