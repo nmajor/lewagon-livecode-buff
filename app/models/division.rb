@@ -2,6 +2,7 @@ class Division < ApplicationRecord
   attr_accessor :number_of_groups
   belongs_to :batch
   has_many :groups
+  has_many :challenges
 
   def self.today
     now = Time.zone.now

@@ -19,6 +19,7 @@ class DivisionsController < ApplicationController
   end
 
   def show
+    @challenge = Challenge.new
   end
 
   def new

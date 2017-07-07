@@ -1,0 +1,12 @@
+<%= simple_form_for([@division, @challenge]) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :num, label: "Number" %>
+    <%= f.input :classmate_html, label: "Classmate Page HTML", as: :text %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
