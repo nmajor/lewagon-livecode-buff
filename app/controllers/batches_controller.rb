@@ -1,5 +1,5 @@
 class BatchesController < ApplicationController
-  before_action :set_batch, only: [:show, :edit, :update, :destroy]
+  before_action :set_batch, only: [:show, :edit, :update, :destroy, :random]
 
   def index
     @batches = Batch.all
@@ -13,6 +13,10 @@ class BatchesController < ApplicationController
   end
 
   def edit
+  end
+
+  def random
+    @groups = @batch.users.to_a.shuffle.each_slice(params[:group_count].to_i).to_a
   end
 
   def create
@@ -44,6 +48,6 @@ class BatchesController < ApplicationController
     end
 
     def batch_params
-      params.fetch(:batch, {})
+      params.require(:batch).permit(:num, :classmate_html)
     end
 end

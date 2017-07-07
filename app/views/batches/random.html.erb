@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row">
+    <% @groups.each_with_index do |group, index| %>
+      <div class="col-md-3">
+        <h1>Group <%= index + 1 %></h1>
+        <% group.each do |user| %>
+          <div><% user.name %> - <%= user.email %></div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
