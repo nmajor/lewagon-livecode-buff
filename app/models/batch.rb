@@ -1,7 +1,8 @@
 class Batch < ApplicationRecord
   attr_accessor :classmate_html
   has_many :batchships
-  has_many :users, through: :batchships
+  has_many :divisions
+  has_many :students, through: :batchships
 
   validates :num, uniqueness: true
   before_validation :parse_classmate_html, :if => Proc.new { |model| model.classmate_html }
@@ -18,11 +19,13 @@ class Batch < ApplicationRecord
 
       avatar = student_cols[0].at_css('.img-thumbnail').attribute('src').value
       name = student_cols[1].at_css('strong').text
-      email = student_cols[1].search('small')[2].at_css('a').attribute('href').value.gsub('mailto:', '')
 
-      user = User.find_by(email: email)
-      user ||= User.create(email: email, password: 'secret-dont-guess-me', name: name)
-      Batchship.create(user: user, batch: self)
+      student = Student.find_by(name: name)
+      if !student
+        student = Student.create(name: name, avatar_url: avatar)
+      end
+
+      Batchship.create(student: student, batch: self)
     end
   end
 end

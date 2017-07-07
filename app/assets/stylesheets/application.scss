@@ -13,3 +13,10 @@
 @import "layout/index";
 @import "components/index";
 @import "pages/index";
+
+.division-group-card {
+  .student-card {
+    .name { display: inline-block; }
+    .avatar { display: inline-block; }
+  }
+}

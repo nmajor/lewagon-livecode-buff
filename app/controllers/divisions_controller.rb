@@ -1,7 +1,17 @@
 class DivisionsController < ApplicationController
   before_action :set_division, only: [:show, :edit, :update, :destroy, :random]
+  before_action :set_batch
 
   def today
+    @division = Division.today
+    p @batch
+
+    if @division
+      render :show
+    else
+      @division = Division.new
+      render :new
+    end
   end
 
   def index
@@ -20,9 +30,14 @@ class DivisionsController < ApplicationController
 
   def create
     @division = Division.new(division_params)
+    @division.batch = @batch
 
     if @division.save
-      redirect_to @division, notice: 'division was successfully created.'
+      if @division.is_today
+        redirect_to today_path, notice: 'division was successfully created.'
+      else
+        redirect_to division_path(@batch, @division), notice: 'division was successfully created.'
+      end
     else
       render :new
     end
@@ -30,7 +45,11 @@ class DivisionsController < ApplicationController
 
   def update
     if @division.update(division_params)
-      redirect_to @division, notice: 'division was successfully updated.'
+      if @division.is_today
+        redirect_to today_path, notice: 'division was successfully updated.'
+      else
+        redirect_to division_path(@batch, @division), notice: 'division was successfully updated.'
+      end
     else
       render :edit
     end
@@ -43,7 +62,17 @@ class DivisionsController < ApplicationController
 
   private
     def set_division
-      @division = division.find(params[:id])
+      @division = Division.find(params[:id])
+    end
+
+    def set_batch
+      if params[:batch_id]
+        @batch = Batch.find_by_id(params[:batch_id])
+      elsif params[:batch_num]
+        @batch = Batch.find_by_num(params[:batch_id])
+      else
+        @batch = Batch.find_by_num(86)
+      end
     end
 
     def division_params

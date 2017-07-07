@@ -3,13 +3,12 @@ Rails.application.routes.draw do
     member do
       get 'random/:group_count' => 'batches#random'
     end
+
+    resources :divisions
   end
 
-  resources :divisions do
-    collection do
-      get 'today' => 'divisions#today'
-    end
-  end
+  get ':batch_num/today' => 'divisions#today'
+  get 'today' => 'divisions#today'
 
   devise_for :users
   root to: 'pages#home'
