@@ -4,9 +4,11 @@ class DivisionsController < ApplicationController
 
   def today
     @division = Division.today
-    p @batch
+    @challenge = Challenge.new
 
-    if @division
+    if !@batch
+      redirect_to new_batch_path
+    elsif @division
       render :show
     else
       @division = Division.new

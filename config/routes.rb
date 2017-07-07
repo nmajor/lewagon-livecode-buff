@@ -7,6 +7,10 @@ Rails.application.routes.draw do
     resources :divisions
   end
 
+  resources :divisions, only: [] do
+    resources :challenges
+  end
+
   get ':batch_num/today' => 'divisions#today'
   get 'today' => 'divisions#today'
 

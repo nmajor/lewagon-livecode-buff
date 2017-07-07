@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170707134113) do
+ActiveRecord::Schema.define(version: 20170707153809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,14 @@ ActiveRecord::Schema.define(version: 20170707134113) do
     t.index ["batch_id"], name: "index_batchships_on_batch_id", using: :btree
     t.index ["role"], name: "index_batchships_on_role", using: :btree
     t.index ["student_id"], name: "index_batchships_on_student_id", using: :btree
+  end
+
+  create_table "challenges", force: :cascade do |t|
+    t.string   "desc"
+    t.integer  "division_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["division_id"], name: "index_challenges_on_division_id", using: :btree
   end
 
   create_table "divisions", force: :cascade do |t|
@@ -83,6 +91,7 @@ ActiveRecord::Schema.define(version: 20170707134113) do
   end
 
   add_foreign_key "batchships", "batches"
+  add_foreign_key "challenges", "divisions"
   add_foreign_key "divisions", "batches"
   add_foreign_key "groups", "divisions"
   add_foreign_key "groupships", "groups"
