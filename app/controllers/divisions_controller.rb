@@ -1,4 +1,5 @@
 class DivisionsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:today]
   before_action :set_division, only: [:show, :edit, :update, :destroy, :random]
   before_action :set_batch
 
