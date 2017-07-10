@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @merit.name %>
+</p>
+
+<p>
+  <strong>Points:</strong>
+  <%= @merit.points %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= cl_image_tag @merit.image %>
+</p>
+
+<%= link_to 'Edit', edit_merit_path(@merit) %> |
+<%= link_to 'Back', merits_path %>

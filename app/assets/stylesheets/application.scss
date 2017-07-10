@@ -14,9 +14,61 @@
 @import "components/index";
 @import "pages/index";
 
+.bottom-bumper {
+  margin-bottom: 10px;
+}
+
 .division-group-card {
   .student-card {
     .name { display: inline-block; }
     .avatar { display: inline-block; }
   }
+}
+
+.group-list {
+  h3 {
+    margin-top: 0,
+  }
+
+  .team {
+    .badges {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+      padding-right: 95px;
+
+      img.merit-image {
+        height: 70px;
+        width: 70px;
+        border-radius: 50%;
+      }
+    }
+    .score {
+      text-align: center;
+      width: 110px;
+      position: absolute;
+      right: 0;
+      font-size: 50px;
+      font-weight: 600;
+      padding: 0 10px;
+    }
+  }
+}
+
+.merit-summary {
+  text-align: center;
+
+  .merit-image {
+    img {
+      border-radius: 50%;
+    }
+  }
+  .points {
+    font-size: 100px;
+    font-weight: 600;
+  }
+}
+
+.modals {
+  display: none;
 }

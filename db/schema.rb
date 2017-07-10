@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170707153809) do
+ActiveRecord::Schema.define(version: 20170710114158) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "awards", force: :cascade do |t|
+    t.integer  "merit_id"
+    t.integer  "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_awards_on_group_id", using: :btree
+    t.index ["merit_id"], name: "index_awards_on_merit_id", using: :btree
+  end
 
   create_table "batches", force: :cascade do |t|
     t.integer  "num"
@@ -50,9 +59,10 @@ ActiveRecord::Schema.define(version: 20170707153809) do
 
   create_table "groups", force: :cascade do |t|
     t.integer  "division_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.string   "name"
+    t.integer  "score",       default: 0
     t.index ["division_id"], name: "index_groups_on_division_id", using: :btree
   end
 
@@ -63,6 +73,14 @@ ActiveRecord::Schema.define(version: 20170707153809) do
     t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_groupships_on_group_id", using: :btree
     t.index ["student_id"], name: "index_groupships_on_student_id", using: :btree
+  end
+
+  create_table "merits", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "points"
+    t.string   "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "students", force: :cascade do |t|
@@ -90,6 +108,8 @@ ActiveRecord::Schema.define(version: 20170707153809) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "awards", "groups"
+  add_foreign_key "awards", "merits"
   add_foreign_key "batchships", "batches"
   add_foreign_key "challenges", "divisions"
   add_foreign_key "divisions", "batches"

@@ -1,0 +1,8 @@
+<% merits.each do |merit| %>
+  $(".merit-modal-click").on('click', function() {
+    $($(this).data('modal')).modal({
+      showClose: true,
+    });
+    return false;
+  });
+<% end %>

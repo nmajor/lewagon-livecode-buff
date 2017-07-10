@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :merits
   resources :batches do
     member do
       get 'random/:group_count' => 'batches#random'
@@ -9,6 +10,16 @@ Rails.application.routes.draw do
 
   resources :divisions, only: [] do
     resources :challenges
+
+    member do
+      get 'teams'
+    end
+  end
+
+  resources :groups, only: [] do
+    member do
+      post 'award'
+    end
   end
 
   get ':batch_num/today' => 'divisions#today'

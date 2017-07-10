@@ -17,6 +17,10 @@ class DivisionsController < ApplicationController
     end
   end
 
+  def teams
+    @division = Division.today
+  end
+
   def index
     @divisiones = Division.all
   end

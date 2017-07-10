@@ -1,0 +1,7 @@
+<div class="row">
+  <% @division.groups_sorted_by_student_count.each do |group| %>
+    <div class="col-md-3">
+      <%= render 'shared/group_students_card', group: group %>
+    </div>
+  <% end %>
+</div>

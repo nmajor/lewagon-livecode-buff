@@ -1,0 +1,17 @@
+<ul class="list-group group-list">
+  <% groups.each do |group| %>
+    <li class="list-group-item team group-<%= group.id %>">
+      <%= render 'shared/group_list_row', group: group %>
+    </li>
+  <% end %>
+</ul>
+
+<%= render 'shared/merit_modals', merits: Merit.all %>
+
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(document).ready(function() {
+      <%= render 'shared/merit_modal_binding', merits: Merit.all %>
+    });
+  <% end %>
+<% end %>

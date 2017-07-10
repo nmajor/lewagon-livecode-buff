@@ -9,6 +9,10 @@ class Division < ApplicationRecord
     self.where(:created_at => (now.beginning_of_day..now.end_of_day)).first
   end
 
+  def groups_sorted_by_student_count
+    groups.sort_by{|g| g.students.count }
+  end
+
   def is_today
     created_at.to_date == Date.current
   end

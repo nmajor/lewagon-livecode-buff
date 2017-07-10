@@ -1,0 +1,7 @@
+<div class="modals">
+  <% merits.each do |merit| %>
+    <div id="merit-modal-<%= merit.id %>" class="modal">
+      <%= render 'shared/merit_summary', merit: merit %>
+    </div>
+  <% end %>
+</div>
