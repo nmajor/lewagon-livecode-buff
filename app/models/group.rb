@@ -2,7 +2,7 @@ class Group < ApplicationRecord
   belongs_to :division
   has_many :groupships, dependent: :destroy
   has_many :students, through: :groupships
-  has_many :awards
+  has_many :awards, dependent: :destroy
   has_many :merits, through: :awards
 
   default_scope { order(score: :desc) }

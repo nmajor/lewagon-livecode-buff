@@ -1,0 +1,10 @@
+<h1 class="text-center"><%= @group.name %></h1>
+<div class="group-score text-center"><%= @group.score %></div>
+<h3 class="text-center">Badges!</h3>
+<div class="row group-show-merits">
+  <% @group.merits.each do |merit| %>
+    <div class="col-md-4">
+      <%= render 'shared/merit_summary', merit: merit %>
+    </div>
+  <% end %>
+</div>

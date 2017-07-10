@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :groups, only: [] do
+  resources :groups, only: [:show] do
     member do
       post 'award'
     end

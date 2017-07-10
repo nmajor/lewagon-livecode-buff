@@ -68,7 +68,31 @@
     font-weight: 600;
   }
 }
-
+.merit-modal-click {
+  &:hover {
+    cursor: pointer;
+  }
+}
 .modals {
   display: none;
+}
+
+.group-score {
+  font-size: 120px;
+  font-weight: 600;
+}
+
+.group-show-merits {
+  .merit-summary {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+
+  }
+  .merit-image {
+    img {
+      height: 200px;
+      width: 200px;
+    }
+  }
 }
