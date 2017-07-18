@@ -12,6 +12,11 @@ class Group < ApplicationRecord
     self.save
   end
 
+  def random_member
+    offset = rand(students.count)
+    students.offset(offset).first
+  end
+
   def self.random_name
     adjectives = %w(pretty bad good ugly amazing dark expert patron don alcoholic angry arrogant at-the-ready bat-shit-crazy blathering bull headed confused cruel-hearted demanding drunken fiercely-loyal flickering flirting free-loading frisky greedy hateful house-broken hyperactive high-end idiotic infuriating insecure maniacal mentally impaired misunderstood naked narrow-minded out-of-control outnumbered pea-brained rebellious self-absorbed shaky shivering sickened slippery stubborn territorial tripping twisted underhanded useless vengeful vile yapping zippy zombie adulterous)
 

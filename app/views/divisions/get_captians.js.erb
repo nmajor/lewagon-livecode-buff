@@ -1,0 +1,5 @@
+$("#captains-modal").html("<%= j render 'captains', captains: @captains %>");
+$("#captains-modal").modal({
+  showClose: false,
+});
+<%= render 'shared/merit_modal_binding', merits: Merit.all %>

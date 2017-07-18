@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
     member do
       get 'teams'
+      get 'captains', to: 'divisions#get_captians'
     end
   end
 

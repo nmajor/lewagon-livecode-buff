@@ -1,5 +1,5 @@
 $("#division-group-list").html("<%= j render 'shared/group_list', groups: @group.division.groups %>");
 $("#merit-modal-<%= @merit.id %>").modal({
-  showClose: true,
+  showClose: false,
 });
 <%= render 'shared/merit_modal_binding', merits: Merit.all %>

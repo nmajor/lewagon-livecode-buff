@@ -1,0 +1,11 @@
+<div class="row">
+  <% captains.each do |data| %>
+    <div class="col-sm-6">
+      <div class="captain">
+        <h3><%= data[:group].name %></h3>
+        <div><%= image_tag data[:captain].avatar_url, class: "avatar-large" %></div>
+        <div><%= data[:captain].name %></div>
+      </div>
+    </div>
+  <% end %>
+</div>
