@@ -4,7 +4,7 @@ class Group < ApplicationRecord
   has_many :students, through: :groupships
   has_many :awards, dependent: :destroy
   has_many :merits, through: :awards
-  belongs_to :captain, class_name: "Student", foreign_key: :captain_id
+  belongs_to :captain, class_name: "Student", foreign_key: :captain_id, required: false
 
   default_scope { order(score: :desc) }
 

@@ -36,6 +36,8 @@ class Division < ApplicationRecord
       student_group.each do |student|
         Groupship.create(student: student, group: group)
       end
+      p "Blah hey #{group.name}"
+      p group.errors.messages
     end
   end
 end

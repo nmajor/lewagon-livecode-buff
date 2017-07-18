@@ -1,3 +1,5 @@
 <div id="captains-modal" style="max-width: inherit; display: none;">
-  <%= render 'divisions/captains', groups: @division.groups %>
+  <% if @division.groups.all?{|group| group.captain } %>
+    <%= render 'divisions/captains', groups: @division.groups %>
+  <% end %>
 </div>
