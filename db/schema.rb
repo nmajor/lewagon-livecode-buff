@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170710150722) do
+ActiveRecord::Schema.define(version: 20170718153827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,8 @@ ActiveRecord::Schema.define(version: 20170710150722) do
     t.datetime "updated_at",              null: false
     t.string   "name"
     t.integer  "score",       default: 0
+    t.integer  "captain_id"
+    t.index ["captain_id"], name: "index_groups_on_captain_id", using: :btree
     t.index ["division_id"], name: "index_groups_on_division_id", using: :btree
   end
 

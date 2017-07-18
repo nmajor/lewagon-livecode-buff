@@ -18,7 +18,8 @@ class DivisionsController < ApplicationController
   end
 
   def get_captians
-    @captains = @division.generate_group_captains
+    @division.generate_group_captains!
+    @groups = @division.groups
   end
 
   def teams

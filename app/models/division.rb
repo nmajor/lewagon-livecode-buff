@@ -19,15 +19,10 @@ class Division < ApplicationRecord
 
   after_save :build_groups, :if => Proc.new { |model| model.number_of_groups }
 
-  def generate_group_captains
-    captains = []
+  def generate_group_captains!
     groups.each do |group|
-      captains.push({
-        group: group,
-        captain: group.random_member,
-      })
+      group.randomize_captain!
     end
-    captains
   end
 
   private

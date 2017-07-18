@@ -4,6 +4,7 @@ class Group < ApplicationRecord
   has_many :students, through: :groupships
   has_many :awards, dependent: :destroy
   has_many :merits, through: :awards
+  belongs_to :captain, class_name: "Student", foreign_key: :captain_id
 
   default_scope { order(score: :desc) }
 
@@ -15,6 +16,15 @@ class Group < ApplicationRecord
   def random_member
     offset = rand(students.count)
     students.offset(offset).first
+  end
+
+  def randomize_captain
+    self.captain = random_member
+  end
+
+  def randomize_captain!
+    self.randomize_captain
+    self.save
   end
 
   def self.random_name

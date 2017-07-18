@@ -6,6 +6,7 @@
 <div class="row bottom-bumper top-bumper">
   <div class="col-xs-6">
     <%= link_to 'New Team Captains', captains_division_path(@division), remote: true %>
+    <% if @division.groups.any?{|group| group.captain } %> - <a href="#captains-modal" rel="modal:open" class="right-bumper">Current Captains</a><% end %>
   </div>
   <div class="col-xs-6 text-right">
     <%= link_to 'Today\'s teams', teams_division_path(@division) %>

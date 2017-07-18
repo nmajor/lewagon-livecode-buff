@@ -1,10 +1,10 @@
 <div class="row">
-  <% captains.each do |data| %>
+  <% groups.each do |group| %>
     <div class="col-sm-6">
       <div class="captain">
-        <h3><%= data[:group].name %></h3>
-        <div><%= image_tag data[:captain].avatar_url, class: "avatar-large" %></div>
-        <div><%= data[:captain].name %></div>
+        <h3><%= group.name %></h3>
+        <div><%= image_tag group.captain.avatar_url, class: "avatar-large" %></div>
+        <div><%= group.captain.name %></div>
       </div>
     </div>
   <% end %>

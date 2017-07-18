@@ -1,5 +1,5 @@
-$("#captains-modal").html("<%= j render 'captains', captains: @captains %>");
+$("#division-group-list").html("<%= j render 'shared/group_list', groups: @groups %>");
+$("#captains-modal").html("<%= j render 'captains', groups: @groups %>");
 $("#captains-modal").modal({
   showClose: false,
 });
-<%= render 'shared/merit_modal_binding', merits: Merit.all %>
