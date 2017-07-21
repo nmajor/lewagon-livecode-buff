@@ -5,13 +5,13 @@ class DivisionsController < ApplicationController
 
   def today
     @division = Division.today
-    @challenge = @division.latest_challenge || Challenge.new
-    # @timer = @challenge.minutes_to_string
-    @timer = '0:10'
 
     if !@batch
       redirect_to new_batch_path
     elsif @division
+      # @timer = @challenge.minutes_to_string
+      @timer = '0:10'
+      @challenge = @division.latest_challenge || Challenge.new
       render :show
     else
       @division = Division.new
