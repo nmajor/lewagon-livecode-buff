@@ -15,7 +15,7 @@ class Group < ApplicationRecord
   end
 
   def randomize_captain
-    self.recent_captain_ids << captain.id
+    self.recent_captain_ids << captain.id if captain
     self.recent_captain_ids = [] if self.recent_captain_ids.size == students.count
 
     if self.recent_captain_ids.size > 0
