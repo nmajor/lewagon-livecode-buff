@@ -1,0 +1,59 @@
+<% if @timer %>
+  <div id="timer-bar">
+    <span id="timer"></span>
+    <a id="toggle-timer-video" href="#">toggle video</a>
+    <div id="timer-video-wrapper" style="display:none;">
+      <iframe id="timer-video" width="300" height="300"
+        src="https://www.youtube.com/embed/VBlFHuCzPgY?rel=0">
+      </iframe>
+    </div>
+  </div>
+
+  <% content_for(:after_js) do %>
+    <%= javascript_tag do %>
+      $(document).ready(function() {
+
+        $('#toggle-timer-video').click(function() {
+          $('#timer-video-wrapper').toggle();
+        });
+
+        document.getElementById('timer').innerHTML = '<%= @timer %>';
+        startTimer();
+        playVideo();
+
+        function playVideo() {
+          $("#timer-video")[0].src += "&autoplay=1";
+        }
+
+        function stopVideo() {
+          $("#timer-video")[0].src = $("#timer-video")[0].src.replace("&autoplay=1", '')
+        }
+
+        function startTimer() {
+          var presentTime = document.getElementById('timer').innerHTML;
+          var timeArray = presentTime.split(/[:]+/);
+          var m = timeArray[0];
+          var s = checkSecond((timeArray[1] - 1));
+          if(s==59){m=m-1}
+
+          if(m < 0){
+            console.log('timer completed');
+            clearTimeout(timeout);
+            stopVideo();
+          } else {
+            document.getElementById('timer').innerHTML =
+              m + ":" + s;
+            timeout = setTimeout(startTimer, 1000);
+          }
+        }
+
+        function checkSecond(sec) {
+          if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
+          if (sec < 0) {sec = "59"};
+          console.log('blah seconds ', sec);
+          return sec;
+        }
+      });
+    <% end %>
+  <% end %>
+<% end %>

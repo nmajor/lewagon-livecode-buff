@@ -5,6 +5,7 @@ class Group < ApplicationRecord
   has_many :awards, dependent: :destroy
   has_many :merits, through: :awards
   belongs_to :captain, class_name: "Student", foreign_key: :captain_id, required: false
+  serialize :recent_captain_ids, Array
 
   default_scope { order(score: :desc) }
 
@@ -13,13 +14,17 @@ class Group < ApplicationRecord
     self.save
   end
 
-  def random_member
-    offset = rand(students.count)
-    students.offset(offset).first
-  end
-
   def randomize_captain
-    self.captain = random_member
+    self.recent_captain_ids << captain.id
+    self.recent_captain_ids = [] if self.recent_captain_ids.size == students.count
+
+    if self.recent_captain_ids.size > 0
+      offset = rand(students.count - self.recent_captain_ids.size)
+      self.captain = students.where.not(id: self.recent_captain_ids).offset(offset).first
+    else
+      offset = rand(students.count)
+      self.captain = students.offset(offset).first
+    end
   end
 
   def randomize_captain!

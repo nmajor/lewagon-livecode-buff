@@ -4,6 +4,10 @@ class Division < ApplicationRecord
   has_many :groups
   has_many :challenges
 
+  def latest_challenge
+    challenges.last
+  end
+
   def self.today
     now = Time.zone.now
     self.where(:created_at => (now.beginning_of_day..now.end_of_day)).first
@@ -36,8 +40,6 @@ class Division < ApplicationRecord
       student_group.each do |student|
         Groupship.create(student: student, group: group)
       end
-      p "Blah hey #{group.name}"
-      p group.errors.messages
     end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170718153827) do
+ActiveRecord::Schema.define(version: 20170721155118) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,8 +44,10 @@ ActiveRecord::Schema.define(version: 20170718153827) do
   create_table "challenges", force: :cascade do |t|
     t.string   "desc"
     t.integer  "division_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "minutes"
+    t.boolean  "completed",   default: false
     t.index ["division_id"], name: "index_challenges_on_division_id", using: :btree
   end
 
@@ -59,11 +61,12 @@ ActiveRecord::Schema.define(version: 20170718153827) do
 
   create_table "groups", force: :cascade do |t|
     t.integer  "division_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "name"
-    t.integer  "score",       default: 0
+    t.integer  "score",              default: 0
     t.integer  "captain_id"
+    t.text     "recent_captain_ids"
     t.index ["captain_id"], name: "index_groups_on_captain_id", using: :btree
     t.index ["division_id"], name: "index_groups_on_division_id", using: :btree
   end

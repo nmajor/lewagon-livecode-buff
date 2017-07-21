@@ -5,7 +5,9 @@ class DivisionsController < ApplicationController
 
   def today
     @division = Division.today
-    @challenge = Challenge.new
+    @challenge = @division.latest_challenge || Challenge.new
+    # @timer = @challenge.minutes_to_string
+    @timer = '0:10'
 
     if !@batch
       redirect_to new_batch_path
