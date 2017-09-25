@@ -86,7 +86,7 @@ class DivisionsController < ApplicationController
       elsif params[:batch_num]
         @batch = Batch.find_by_num(params[:batch_id])
       else
-        @batch = Batch.find_by_num(86)
+        @batch = Batch.find_by_num(97)
       end
     end
 
